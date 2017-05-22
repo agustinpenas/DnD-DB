@@ -14,12 +14,14 @@ int rolld8();
 int rolld20();
 int roll6d8();
 
-void bestBurst();
+void bestBurstCombinacion();
+void bestBurstSinMenos5();
+void bestBurstMenos5();
 void bestTurn();
 
 
 int main(int argc, char* argv[]){
-bestBurst();
+  bestBurstCombinacion();
   return 0;
 }
 
@@ -63,7 +65,120 @@ void bestTurn(){
   fclose(pFile);
 }
 
-void bestBurst(){
+
+void bestBurstSinMenos5(){
+
+  FILE *pFile;
+  pFile = fopen( "SinMenos5.txt", "a" );
+  
+  srand(time(NULL));
+  for(int i =0; i<10000;i++){
+    int at1,at2,at3,at4;
+
+    int cantSmites = 0;
+    if(rolld20()>5){
+      at1=rolld8()+5;
+      at1+=roll6d8();
+      cantSmites++;
+    }else{
+      at1=0;
+    }
+
+    if(rolld20()>5){
+      at2=rolld8()+5;
+      if(cantSmites<2){
+        at2+=roll6d8();
+        cantSmites++;
+      }
+    }else{
+      at2=0;
+    }
+
+    if(rolld20()>5){
+      at3=rolld8()+5;
+      if(cantSmites<2){
+        at3+=roll6d8();
+        cantSmites++;
+      }
+    }else{
+      at3=0;
+    }
+
+
+    if(rolld20()>5){
+      at4=rolld8()+5;
+      if(cantSmites<2){
+        at4+=roll6d8();
+        cantSmites++;
+      }
+    }else{
+      at4=0;
+    }
+
+    int dmg = at1+at2+at3+at4;
+    fprintf(pFile,"%d\n",dmg);
+
+  }
+  fclose(pFile);
+}
+
+void bestBurstMenos5(){
+
+  FILE *pFile;
+  pFile = fopen( "ConMenos5.txt", "a" );
+  
+  srand(time(NULL));
+  for(int i =0; i<10000;i++){
+    int at1,at2,at3,at4;
+
+    int cantSmites = 0;
+    if(rolld20()>10){
+      at1=rolld8()+15;
+      at1+=roll6d8();
+      cantSmites++;
+    }else{
+      at1=0;
+    }
+
+    if(rolld20()>10){
+      at2=rolld8()+15;
+      if(cantSmites<2){
+        at2+=roll6d8();
+        cantSmites++;
+      }
+    }else{
+      at2=0;
+    }
+
+    if(rolld20()>10){
+      at3=rolld8()+15;
+      if(cantSmites<2){
+        at3+=roll6d8();
+        cantSmites++;
+      }
+    }else{
+      at3=0;
+    }
+
+
+    if(rolld20()>10){
+      at4=rolld8()+15;
+      if(cantSmites<2){
+        at4+=roll6d8();
+        cantSmites++;
+      }
+    }else{
+      at4=0;
+    }
+
+    int dmg = at1+at2+at3+at4;
+    fprintf(pFile,"%d\n",dmg);
+
+  }
+  fclose(pFile);
+}
+
+void bestBurstCombinacion(){
 
   FILE *pFile;
   pFile = fopen( "Combinacion.txt", "a" );
@@ -71,7 +186,7 @@ void bestBurst(){
   srand(time(NULL));
   for(int i =0; i<10000;i++){
     int at1,at2,at3,at4;
-    int roll;
+
     int cantSmites = 0;
     if(rolld20()>5){
       at1=rolld8()+5;
